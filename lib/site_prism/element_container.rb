@@ -50,6 +50,7 @@ module SitePrism
       create_existence_checker iframe_name, element_selector
       create_nonexistence_checker iframe_name, element_selector
       create_waiter iframe_name, element_selector
+      create_disappearance_waiter iframe_name, element_selector
       define_method iframe_name do |&block|
         within_frame scope_selector do
           block.call iframe_page_class.new
@@ -83,6 +84,7 @@ module SitePrism
       create_existence_checker name, *find_args
       create_nonexistence_checker name, *find_args
       create_waiter name, *find_args
+      create_disappearance_waiter name, *find_args
       create_visibility_waiter name, *find_args
       create_invisibility_waiter name, *find_args
     end
@@ -126,6 +128,18 @@ module SitePrism
           timeout = timeout.nil? ? Waiter.default_wait_time : timeout
           Capybara.using_wait_time timeout do
             element_exists?(*find_args, *runtime_args)
+          end
+        end
+      end
+    end
+
+    def create_disappearance_waiter(element_name, *find_args)
+      method_name = "wait_for_#{element_name}_disappearing"
+      create_helper_method method_name, *find_args do
+        define_method method_name do |timeout = nil, *runtime_args|
+          timeout = timeout.nil? ? Waiter.default_wait_time : timeout
+          Capybara.using_wait_time timeout do
+            element_does_not_exist?(*find_args, *runtime_args)
           end
         end
       end
