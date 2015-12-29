@@ -2,8 +2,20 @@ Then(/^when I wait for the element that takes a while to appear$/) do
   @test_site.home.wait_for_some_slow_element
 end
 
+Then(/^when I wait for the element that takes a while to disappear$/) do
+  @test_site.home.wait_for_disappears_element_disappearing
+end
+
 Then(/^I successfully wait for it to appear$/) do
   expect(@test_site.home).to have_some_slow_element
+end
+
+Then(/^I successfully see element that takes a while to disappear/) do
+  expect(@test_site.home).to have_disappears_element
+end
+
+Then(/^I successfully wait for it to disappear$/) do
+  expect(@test_site.home).to have_no_disappears_element
 end
 
 When(/^I wait for a specifically short amount of time for an element to appear$/) do

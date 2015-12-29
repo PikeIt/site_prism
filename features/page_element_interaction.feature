@@ -35,6 +35,12 @@ Feature: Page element interaction
     Then when I wait for the element that takes a while to appear
     Then I successfully wait for it to appear
 
+  Scenario: Wait for element disappearing
+    When I navigate to the home page
+    Then I successfully see element that takes a while to disappear
+    Then when I wait for the element that takes a while to disappear
+    Then I successfully wait for it to disappear
+
   Scenario: Wait specific amount of time for element to appear
     When I navigate to the home page
     And I wait for a specifically short amount of time for an element to appear

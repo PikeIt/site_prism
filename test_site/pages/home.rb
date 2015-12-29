@@ -8,6 +8,7 @@ class TestHomePage < SitePrism::Page
   element :go_button, :xpath, '//input'
   element :link_to_search_page, :xpath, '//a'
   element :some_slow_element, :xpath, '//a[@class="slow"]'
+  element :disappears_element, :xpath, '//a[@id="disappear"]'
   element :invisible_element, 'input.invisible'
   element :shy_element, 'input#will_become_visible'
   element :retiring_element, 'input#will_become_invisible'
